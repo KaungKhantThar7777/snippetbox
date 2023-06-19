@@ -14,3 +14,5 @@ func (app *application) routes() *http.ServeMux {
 
 	return mux
 }
+
+// docker run --name mysql -e MYSQL_ROOT_PASSWORD=admin -d -v mysql:/var/lib/mysql mysql
