@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-	"text/template"
 
 	"snippetbox.kkt77.net/internal/models"
 )
@@ -23,29 +22,9 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	files := []string{
-		"./ui/html/pages/base.tmpl",
-		"./ui/html/partials/nav.tmpl",
-		"./ui/html/pages/home.tmpl",
-	}
-	ts, err := template.ParseFiles(files...)
-
-	if err != nil {
-		app.errorLog.Print(err.Error())
-		app.serverError(w, err)
-		return
-	}
-
-	data := templateData{
+	app.render(w, http.StatusOK, "home.tmpl", &templateData{
 		Snippets: snippets,
-	}
-
-	err = ts.ExecuteTemplate(w, "base", data)
-	if err != nil {
-		app.errorLog.Print(err.Error())
-		app.serverError(w, err)
-
-	}
+	})
 
 }
 
@@ -69,27 +48,9 @@ func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	files := []string{
-		"./ui/html/pages/base.tmpl",
-		"./ui/html/partials/nav.tmpl",
-		"./ui/html/pages/view.tmpl",
-	}
-
-	ts, err := template.ParseFiles(files...)
-	if err != nil {
-		app.serverError(w, err)
-		return
-	}
-
-	data := &templateData{
+	app.render(w, http.StatusOK, "view.tmpl", &templateData{
 		Snippet: snippet,
-	}
-
-	err = ts.ExecuteTemplate(w, "base", data)
-
-	if err != nil {
-		app.serverError(w, err)
-	}
+	})
 }
 
 func (app *application) snippetCreate(w http.ResponseWriter, r *http.Request) {
