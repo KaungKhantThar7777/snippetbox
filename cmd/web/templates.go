@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"path/filepath"
 
@@ -21,7 +20,6 @@ func newTemplateCache() (map[string]*template.Template, error) {
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(pages)
 	for _, page := range pages {
 		name := filepath.Base(page)
 
