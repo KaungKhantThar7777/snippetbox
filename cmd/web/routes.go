@@ -12,7 +12,7 @@ func (app *application) routes() http.Handler {
 	mux.HandleFunc("/snippet/view", app.snippetView)
 	mux.HandleFunc("/snippet/create", app.snippetCreate)
 
-	return secureHeaders(mux)
+	return app.logRequest(secureHeaders(mux))
 }
 
 // docker run --name mysql -e MYSQL_ROOT_PASSWORD=admin -d -v mysql:/var/lib/mysql mysql
