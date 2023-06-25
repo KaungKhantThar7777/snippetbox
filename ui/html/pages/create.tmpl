@@ -5,17 +5,17 @@
 <form action="/snippet/create" method="POST">
   <div>
     <label>Title:</label>
+    <input type="text" name="title" value="{{.Form.Title}}" />
     {{ with.Form.FieldErrors.title }}
     <label class="error">{{.}}</label>
     {{ end }}
-    <input type="text" name="title" value="{{.Form.Title}}" />
   </div>
   <div>
     <label>Content:</label>
+    <textarea name="content">{{.Form.Content}}</textarea>
     {{ with.Form.FieldErrors.content }}
     <label class="error">{{.}}</label>
     {{ end }}
-    <textarea name="content" value="{{.Form.Content}}"></textarea>
   </div>
   <div>
     <label>Delete in:</label>
