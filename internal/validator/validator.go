@@ -52,7 +52,7 @@ func (v *Validator) MinChars(val string, n int) bool {
 func (v *Validator) Matches(val string, rx *regexp.Regexp) bool {
 	return rx.MatchString(val)
 }
-func PermittedInt(val int, permittedValues ...int) bool {
+func PermittedValue[T comparable](val T, permittedValues ...T) bool {
 	for i := range permittedValues {
 		if val == permittedValues[i] {
 			return true
